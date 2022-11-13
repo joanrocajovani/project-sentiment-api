@@ -55,13 +55,61 @@ def get_just_year (name):
     df = pd.read_sql_query(query, engine)
     return df.to_dict(orient="records")
 
+# SQL get movies from selected director
+def get_director_everything (name):
+    query = f"""SELECT * 
+    FROM movie
+    WHERE Director = '{name}';"""
 
+    df = pd.read_sql_query(query, engine)
+    return df.to_dict(orient="records") 
 
+def get_director_titles (name):
+    query = f"""SELECT Series_Title 
+    FROM movie
+    WHERE Director = '{name}';"""
+
+    df = pd.read_sql_query(query, engine)
+    return df.to_dict(orient="records")
+
+def get_director_avgrating (name):
+    query = f"""SELECT AVG(IMDB_Rating) 
+    FROM movie
+    WHERE Director = '{name}';"""
+
+    df = pd.read_sql_query(query, engine)
+    return df.to_dict(orient="records")
+
+#Get movies from selected actor
+def get_actor_everything (name):
+    query = f"""SELECT *
+    FROM movie
+    WHERE Star1 = '{name}' OR Star2 = '{name}' OR Star3 = '{name}' OR Star4 = '{name}';"""
+
+    df = pd.read_sql_query(query, engine)
+    return df.to_dict(orient="records")
+
+def get_actor_titles (name):
+    query = f"""SELECT Series_Title
+    FROM movie
+    WHERE Star1 = '{name}' OR Star2 = '{name}' OR Star3 = '{name}' OR Star4 = '{name}';"""
+
+    df = pd.read_sql_query(query, engine)
+    return df.to_dict(orient="records")
+
+def get_actor_avgrating (name):
+    query = f"""SELECT AVG(IMDB_Rating)
+    FROM movie
+    WHERE Star1 = '{name}' OR Star2 = '{name}' OR Star3 = '{name}' OR Star4 = '{name}';"""
+
+    df = pd.read_sql_query(query, engine)
+    return df.to_dict(orient="records")    
+ 
 #INSERTS
-def insert_one_row (scene, character_name, dialogue):
-    query = f"""INSERT INTO users
-     (scene, character_name, dialogue) 
-        VALUES ({scene}, '{character_name}', '{dialogue}');
+def insert_one_row (Series_Title, Released_Year, IMDB_Rating, Overview, Director, Star1, Star2, Star3, Star4):
+    query = f"""INSERT INTO movie
+     (Series_Title, Released_Year, IMDB_Rating, Overview, Director, Star1, Star2, Star3, Star4) 
+        VALUES ('{Series_Title}', '{Released_Year}', '{IMDB_Rating}', '{Overview}', '{Director}', '{Star1}', '{Star2}', '{Star3}', '{Star4}');
     """
     engine.execute(query)
     return f"Correctly introduced!"

@@ -23,31 +23,31 @@ def sql ():
     return jsonify(esecuele.get_everything())
 
 #SQL get from selected movie
-@app.route("/sql/<name>", )
+@app.route("/sql/title/<name>/", )
 def movie_all (name):
     return jsonify(esecuele.get_everything_from_movie(name))
 
-@app.route("/sql/<name>/overview/", )
+@app.route("/sql/title/<name>/overview/", )
 def movie_overview (name):
     return jsonify(esecuele.get_just_description(name))
 
-@app.route("/sql/<name>/director/", )
+@app.route("/sql/title/<name>/director/", )
 def movie_director (name):
     return jsonify(esecuele.get_just_director(name))
 
-@app.route("/sql/<name>/cast/", )
+@app.route("/sql/title/<name>/cast/", )
 def movie_cast (name):
     return jsonify(esecuele.get_just_cast(name))
 
-@app.route("/sql/<name>/rating/", )
+@app.route("/sql/title/<name>/rating/", )
 def movie_rating (name):
     return jsonify(esecuele.get_just_rating(name))
 
-@app.route("/sql/<name>/year/", )
+@app.route("/sql/title/<name>/year/", )
 def movie_year (name):
     return jsonify(esecuele.get_just_year(name))  
 
-@app.route("/sql/<name>/sentiment/", )
+@app.route("/sql/title/<name>/sentiment/", )
 def get_sentiment_overview (name):
     df = esecuele.get_just_description(name)
     nltk.downloader.download('vader_lexicon')

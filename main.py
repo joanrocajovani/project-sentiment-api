@@ -58,11 +58,11 @@ def get_sentiment_overview (name):
             return sia.polarity_scores(x)
         except:
             return x
-    print(df)
-    #df["polarity_score"] = df["Overview"].apply(sa)
+    
+    
     var = sia.polarity_scores(df[0]["Overview"])
-    print(df)
-    #return jsonify(df.to_dict(orient='records'))
+    
+    
     return str(var)
 
 
